@@ -10,7 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-
+- checkout: self
+  persistCredentials: true
 
 - script: |
     sudo apt-get install texlive-latex-extra
