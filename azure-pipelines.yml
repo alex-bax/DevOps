@@ -23,6 +23,7 @@ steps:
     git config --global user.name "alex-bax"
     git add main.pdf
     git commit -m "auto generated pdf from pipeline"
-    git push origin HEAD:main
+    git push origin -f master
+    #git push origin HEAD:main
 
   displayName: 'Run a multi-line script'
