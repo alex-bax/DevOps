@@ -23,7 +23,7 @@ steps:
     git config --global user.name "alex-bax"
     git add main.pdf
     git commit -m "auto generated pdf from pipeline"
-    git pull --rebase
+    git pull
     git push origin master
     #git push origin HEAD:main
 
