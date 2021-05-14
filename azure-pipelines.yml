@@ -19,9 +19,10 @@ steps:
     echo $(ls) 
     echo done pdflatex
 
-    git config ser.email "alex.tennis@live.dk"
-    git config user.name "alex-bax"
+    git config --global user.email "alex.tennis@live.dk"
+    git config --global user.name "alex-bax"
     git add main.pdf
     git commit -m "auto generated pdf from pipeline"
-    git push
+    git push origin HEAD:origin
+
   displayName: 'Run a multi-line script'
