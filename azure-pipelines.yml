@@ -13,8 +13,9 @@ steps:
 
 
 - script: |
-    sudo apt-get install texlive     
+    sudo apt-get install texlive-latex-extra
     echo Starting pdflatex
     pdflatex -interaction=nonstopmode main.tex
+    echo $(ls) 
     echo done pdflatex
   displayName: 'Run a multi-line script'
