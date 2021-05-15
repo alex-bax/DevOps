@@ -19,7 +19,7 @@ stages:
       #   - name: GITHUB_REPO_NAME
       #     value: 'DevOps'  
       #   - name: GITHUB_REPO_URL
-      #     value: '$(https://github.com/alex-bax/DevOps)/$(GITHUB_REPO_NAME)' 
+      #     value: 'https://github.com/alex-bax/DevOps/$(GITHUB_REPO_NAME)' 
       #   - name: GITHUB_USERNAME
       #     value: 'alex-bax'
       #   - name: GITHUB_PUSH_URL
@@ -38,7 +38,7 @@ stages:
           git config --global user.email "alex.tennis@live.dk"
           git config --global user.name "alex-bax"
           git init
-          git remote add origin $GITHUB_REPO_URL
+          git remote add origin https://github.com/alex-bax/DevOps
 
           git add main.pdf
           git commit -m "auto generated pdf from pipeline"
