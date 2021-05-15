@@ -37,12 +37,12 @@ stages:
 
           git config --global user.email "alex.tennis@live.dk"
           git config --global user.name "alex-bax"
-          #git init
-          #git remote add origin https://github.com/alex-bax/DevOps
+          git init
+          git remote add origin https://github.com/alex-bax/DevOps
 
           git add .
           git commit -m "auto generated pdf from pipeline"
-          git pull
+          git pull origin master
           git status
           
           #MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
