@@ -23,12 +23,13 @@ steps:
 
     git config --global user.email "alex.tennis@live.dk"
     git config --global user.name "alex-bax"
-    git add main.pdf
+    git add .
     git commit -m "auto generated pdf from pipeline"
     git status
     #git pull origin master
-    git push origin 
-    #git push origin HEAD:main
+    # git push origin 
+    git push origin HEAD:master
+
   
 - task: PublishBuildArtifacts@1
   inputs:
