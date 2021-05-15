@@ -12,6 +12,7 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
+  clean: true
 
 - script: |
     sudo apt-get install texlive-latex-extra
@@ -24,8 +25,18 @@ steps:
     git config --global user.name "alex-bax"
     git add main.pdf
     git commit -m "auto generated pdf from pipeline"
+    git status
     #git pull origin master
-    git push origin main
+    git push origin 
     #git push origin HEAD:main
+  
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'FilePath'
+    TargetPath: '$(Build.SourcesDirectory)'
+
+
 
   displayName: 'Run a multi-line script'
