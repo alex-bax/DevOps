@@ -37,10 +37,10 @@ stages:
 
           git config --global user.email "alex.tennis@live.dk"
           git config --global user.name "alex-bax"
-          git init
-          git remote add origin https://github.com/alex-bax/DevOps
+          #git init
+          #git remote add origin https://github.com/alex-bax/DevOps
 
-          git add main.pdf
+          git add .
           git commit -m "auto generated pdf from pipeline"
           git status
           
@@ -50,7 +50,7 @@ stages:
           git push https://alex-bax:$(MY_PAT)@github.com/alex-bax/DevOps
           #git pull origin master
           # git push origin 
-          git push origin HEAD:master
+          #git push origin HEAD:master
 
         
       - task: PublishBuildArtifacts@1
