@@ -14,16 +14,16 @@ stages:
   jobs:
     - job: Build
 
-      variables:
-        - group: GitHub_Settings  
-        - name: GITHUB_REPO_NAME
-          value: 'DevOps'  
-        - name: GITHUB_REPO_URL
-          value: '$(https://github.com/alex-bax/DevOps)/$(GITHUB_REPO_NAME)' 
-        - name: GITHUB_USERNAME
-          value: 'alex-bax'
-        - name: GITHUB_PUSH_URL
-          value: '$(GITHUB_)/$(GITHUB_REPO_NAME)'
+      # variables:
+      #   - group: GitHub_Settings  
+      #   - name: GITHUB_REPO_NAME
+      #     value: 'DevOps'  
+      #   - name: GITHUB_REPO_URL
+      #     value: '$(https://github.com/alex-bax/DevOps)/$(GITHUB_REPO_NAME)' 
+      #   - name: GITHUB_USERNAME
+      #     value: 'alex-bax'
+      #   - name: GITHUB_PUSH_URL
+      #     value: '$(GITHUB_)/$(GITHUB_REPO_NAME)'
       pool:
         vmImage: ubuntu-latest
  
