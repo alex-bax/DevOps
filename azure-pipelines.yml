@@ -39,16 +39,22 @@ stages:
           git config --global user.name "alex-bax"
           git init
           git remote add origin https://github.com/alex-bax/DevOps
+          git checkout master
 
           git add .
           git commit -m "auto generated pdf from pipeline"
-          git pull origin master
+          #git pull origin master
           git status
           
+          MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
+          B64_PAT=$(printf "%s"":$MY_PAT" | base64)
+          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone https://dev.azure.com/GroupNeutrals/MiniTwit/_git/alex-bax.DevOps
           #MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
           # format for pushing to GIT: 
           #https://[Github Username]:[Github PAT]@github.com/[GitHub Repo Owner]/[Github Repo Name]
+          
           git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps HEAD:master
+          git clone https://<PAT>@<domain>.visualstudio.com/<domain>/_git/<domain>
           #git pull origin master
           # git push origin 
           #git push origin HEAD:master
