@@ -26,7 +26,7 @@ stages:
           value: '$(GITHUB_)/$(GITHUB_REPO_NAME)'
       pool:
         vmImage: ubuntu-latest
-
+ 
       steps:
       - script: |
           sudo apt-get install texlive-latex-extra
