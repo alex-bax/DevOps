@@ -52,7 +52,7 @@ stages:
           #MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
           # format for pushing to GIT: 
           #https://[Github Username]:[Github PAT]@github.com/[GitHub Repo Owner]/[Github Repo Name]
-          
+          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" push
           git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps HEAD:master
          
           #git pull origin master
