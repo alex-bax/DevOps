@@ -54,7 +54,7 @@ stages:
           #https://[Github Username]:[Github PAT]@github.com/[GitHub Repo Owner]/[Github Repo Name]
           
           git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps HEAD:master
-          git clone https://<PAT>@<domain>.visualstudio.com/<domain>/_git/<domain>
+         
           #git pull origin master
           # git push origin 
           #git push origin HEAD:master
