@@ -49,15 +49,12 @@ stages:
           MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
           B64_PAT=$(printf "%s"":$MY_PAT" | base64)
           git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone https://dev.azure.com/GroupNeutrals/MiniTwit/_git/LatexDevOps
-          
-          #MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
+          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" push
+
           # format for pushing to GIT: 
           #https://[Github Username]:[Github PAT]@github.com/[GitHub Repo Owner]/[Github Repo Name]
-          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" push
-          git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps
-          #git pull origin master
-          # git push origin 
-          #git push origin HEAD:master
+          #git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps
+          
 
         
       - task: PublishBuildArtifacts@1
