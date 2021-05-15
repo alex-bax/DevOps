@@ -42,12 +42,13 @@ stages:
 
           git add .
           git commit -m "auto generated pdf from pipeline"
+          git pull
           git status
           
-          MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
+          #MY_PAT=qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna
           # format for pushing to GIT: 
           #https://[Github Username]:[Github PAT]@github.com/[GitHub Repo Owner]/[Github Repo Name]
-          git push https://alex-bax:$(MY_PAT)@github.com/alex-bax/DevOps HEAD:master
+          git push https://alex-bax:qm7zdmgl27yrr6dyyjpqtncannkthsa5mvll776zarndjirq5zna@github.com/alex-bax/DevOps HEAD:master
           #git pull origin master
           # git push origin 
           #git push origin HEAD:master
