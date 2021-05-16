@@ -3,6 +3,9 @@
 % Language setting
 % Replace `english' with e.g. `spanish' to change the document language
 \usepackage[english]{babel}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{parskip} 
 
 % Set page size and margins
 % Replace `letterpaper' with`a4paper' for UK/EU standard size
@@ -19,29 +22,103 @@
 \begin{document}
 \maketitle
 
-% Checklist - What to include in the report
+%Checklist/skeleton: https://github.com/itu-devops/lecture_notes/blob/master/REPORT.md
 % revised idea for skeleton:
 \section{System's Perspective}
 \subsection{Design of the system} [ALL, intially JACOB AND FREDERIK]
 \subsection{Architecture of the system} ALL, initially ALBERT AND RASMUS]
-\subsection{Dependencies} [ALEKXANDER AND JACOB]
+\subsection{Dependencies} [ALEKXANDER AND JACOB] \\
+\subsubsection{Software dependencies}
+%skal vi lave en rigtig dep. graph? (med pile osv)
+The dependencies of the system is derived via GitHub from the \texttt{mvc-minitwit.csproj} 
+and 
+
+\texttt{HomeControllerTests.csproj} project files. These correspond to the MiniTwit and testing project respectively. The dependency graph can be found on \url{https://github.com/albertbethlowsky/DevOpsGroupH/network/dependencies}. A small snippet of the current graph for both projects can be seen below:
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.1\textwidth]{images/dependencies-snip.png}
+\caption{\label{fig:dep1}Snippet of dependency graphs of both \texttt{mvc-minitwit.csproj} and \\\\ \texttt{HomeControllerTests.csproj}}
+\end{figure}
+\subsubsection{Cloud dependencies}
+These dependencies are related to the services hosted on Azure, where MiniTwit also is deployed. 
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|l|l|X|}
+\hline
+    \textbf{Name} & \textbf{Service} & \textbf{Provider} & \textbf{Description} \\ \hline
+    neutrals-minitwit & App Service & Microsoft Azure & Hosting of web applications (.NET application) \\ \hline
+    minitwit-neutrals & App Service & Microsoft Azure & Hosting of web applications (prometheus, grafana) \\ \hline
+    neutralsseq & App Service & Microsoft Azure & Hosting of web applications (Datalust - Seq) \\ \hline
+    minitwit-neutrals & SQL Server & Microsoft Azure & Hosting of SQL database \\ \hline
+    minitwitDb (minitwit-neutrals) & SQL database & Microsoft Azure & SQL database \\ \hline
+    neutralsminitwit.azurecr.io & Docker container & Azure Container Registry & Containerizing of applications \\ \hline
+\end{tabularx}
+\end{table}
+
 \subsubsection{Important interactions of subsystems} [FREDERIK, JACOB, ALEKXANDER]
-\subsection{Current state of the system} [ALEKXANDER AND FREDERIK]
+%how does components talk together.. e.g. Sequence diagrams
+\subsection{Current state of the system} 
+[ALEKXANDER AND FREDERIK]
+With the help of different static analysis tools, it's possible to get a sense of the state of the system, including an estimation of the technical debt. Their respective results are briefly presented:
+
+\subsubsection*{SonarCloud}
+Based on the results from SonarCloud the systems seems to be in a satisfactory state, however there are a few caveats to point out. The auto-generated contents of \texttt{Migrations/}, and the \texttt{wwwroot/lib} folder has been excluded from all analysis since the latter contains deprecated jQuery libraries. These were given from the beginning, and were thus deemed out of scope to fix with time available. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/sonarcloud.png}
+\caption{\label{fig:dep1} Results from SonarCloud and its different categories, with the Quality Gate passed}
+\end{figure}
+
+The boiler plate, initialization files \texttt{Program.cs}, \texttt{Startup.cs} are excluded from test coverage analysis. \texttt{HomeController.cs} is also excluded from test coverage due to project scope and challenges with mocking cookies.
+% her antages at læser ved hvad HomeController.cs er
+From the maintainability category, there's "2 hours" of debt, but it's worth mentioning that it's a relative estimate based on "Code smells", uncovered and duplicated lines. This estimate should be compared with the estimates from the other tools.   
+\subsubsection*{Code Climate}
+The repository has a maintainability grade of "B", which with their estimates would be about 2 days of technical debt. There are 19 issues in total, split into 8 of duplication and 11 code smells. The file with the lowest maintainability score is \texttt{HomeController.cs} and has a "C", which would be the file to prioritize first for refactoring. The same files and folders have been excluded as with SonarCloud. %check this
+
+As a side note a big source of the issues in both \texttt{HomeController.cs} and \texttt{APIController.cs} comes in the shape of \textit{"Avoid too many return statements"}. This is an issue that can be taken with a grain of salt, since it relates to the debate of "clean OOP" approach, which is harder to implement in server/API application. %let me know if u agree/disagree here  
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/codeclimate.png}
+\caption{\label{fig:dep1} Code Climate summary and overview}
+\end{figure}
+
+\subsubsection*{Better Code}
+[Albert]
+
+\subsubsection*{InferSharp}
+
+
+
+At the top of the \texttt{README.md}, badges of the different tools have been added to help give a quick overview of their results. It's worth mentioning that technical debt is a relative term, and as seen between the tools, can vary quite a lot (e.g. 2 days to 2 hours).
+
 \subsection{Licenses and compatibility}[ALBERT AND RASMUS]
 
 \section{Process perspective}
-\subsection{Interactions between as developers} [RASMUS & ALBERT]
+\subsection{Interactions between developers} [RASMUS & ALBERT]
 \subsection{Team organization} [RASMUS & ALBERT]
-\subsection{Description of CI/CD chains, stages and tools}[ALEKXANDER & FREDERIK]
+\subsection{Description of CI/CD pipelines, stages and tools}[ALEKXANDER & FREDERIK]
+Azure DevOps is used to manage the CI/CD pipelines for the project. See azure-pipelines.yml for the stages and tools utilized in our pipeline. Terraform will be applied to the pipeline in future iterations such that we have automated the infrastructure (IaC) maintenance.  
+
 \subsection{Repository arrangement/organization}[FREDERIK & JACOB]
 \subsection{Applied Branching Strategy}[ALEXANDER & FREDERIK] 
+Throughout the project a "Long-Running Branches" strategy has been used. The \textit{master} branch has primarily been used for code releases or \texttt{.yml} pipeline changes. The  \textit{development} branch was used to merge all the features back into, so that it in turn becomes can be merged into \textit{master} as the next stable release. Finally the individual feature branches correspond to the issues on the Task board on GitHub. Each feature branch is named after their issue number, e.g. \texttt{fea#34APIController}. Pull requests to merge the branches has been used, but not with absolute consistency.   
 \subsection{Applied development process and related tools}[JACOB & FREDERIK]
 \subsubsection{Simple Kanban board}[FREDERIK & RASMUS]
+We have utilized github's projects to manage our tasks. The board consists of the traditional kanban setup with 'tasks', 'in progress', 'parked', and 'done'. 
 \subsection{Monitoring}[JACOB & ALEKXANDER]
+% it's hard to tell exactly what they measure..
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/dashboard.png}
+\caption{\label{fig:dashboard} Grafana dashboards}
+\end{figure}
 \subsection{Logging and log aggregation} [JACOB & ALEKXANDER]
 \subsection{Brief security assessment} [RASMUS & ALBERT]
 \subsection{Applied scaling and load balancing strategy} [FREDERIK AND ALEKXANDER]
-
+Due to different challenges with Azure Kubernetes Service on Azure and Azure DevOps it was not possible to implement scaling within the given time frame. We did however implement azure's 'scale out' service which is a built-in feature that helps applications perform their best when demand changes.  %hvor skal man uddybe grundene?    
 
 \section{Lessons learned perspective}
 \subsection{Evolution and refactoring} [ALL, init JACOB AND RASMUS]
@@ -49,95 +126,6 @@
 \subsection{Maintenance} ALL, init FREDERIK and JACOB]
 
 
-\section{Introduction}
-
-Your introduction goes here! Simply start writing your document and use the Recompile button to view the updated PDF preview. Examples of commonly used commands and features are listed below, to help you get started.
-
-Once you're familiar with the editor, you can find various project setting in the Overleaf menu, accessed via the button in the very top left of the editor. To view tutorials, user guides, and further documentation, please visit our \href{https://www.overleaf.com/learn}{help library}, or head to our plans page to \href{https://www.overleaf.com/user/subscription/plans}{choose your plan}.
-
-\section{Some examples to get started}
-
-\subsection{How to create Sections and Subsections}
-
-Simply use the section and subsection commands, as in this example document! With Overleaf, all the formatting and numbering is handled automatically according to the template you've chosen. If you're using Rich Text mode, you can also create new section and subsections via the buttons in the editor toolbar.
-
-\subsection{How to include Figures}
-
-First you have to upload the image file from your computer using the upload link in the file-tree menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure \ref{fig:frog} in this section for an example.
-
-Note that your figure will automatically be placed in the most appropriate place for it, given the surrounding text and taking into account other figures or tables that may be close by. You can find out more about adding images to your documents in this help article on \href{https://www.overleaf.com/learn/how-to/Including_images_on_Overleaf}{including images on Overleaf}.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.3\textwidth]{frog.jpg}
-\caption{\label{fig:frog}This frog was uploaded via the file-tree menu.}
-\end{figure}
-
-\subsection{How to add Tables}
-
-Use the table and tabular environments for basic tables --- see Table~\ref{tab:widgets}, for example. For more information, please see this help article on \href{https://www.overleaf.com/learn/latex/tables}{tables}. 
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
-
-\subsection{How to add Comments and Track Changes}
-
-Comments can be added to your project by highlighting some text and clicking ``Add comment'' in the top right of the editor pane. To view existing comments, click on the Review menu in the toolbar above. To reply to a comment, click on the Reply button in the lower right corner of the comment. You can close the Review pane by clicking its name on the toolbar when you're done reviewing for the time being.
-
-Track changes are available on all our \href{https://www.overleaf.com/user/subscription/plans}{premium plans}, and can be toggled on or off using the option at the top of the Review pane. Track changes allow you to keep track of every change made to the document, along with the person making the change. 
-
-\subsection{How to add Lists}
-123
-You can make lists with automatic numbering \dots
-
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
-
-\subsection{How to write Mathematics}
-
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-\[S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i\]
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
-
-
-\subsection{How to change the margins and paper size}
-
-Usually the template you're using will have the page margins and paper size set correctly for that use-case. For example, if you're using a journal article template provided by the journal publisher, that template will be formatted according to their requirements. In these cases, it's best not to alter the margins directly.
-
-If however you're using a more general template, such as this one, and would like to alter the margins, a common way to do so is via the geometry package. You can find the geometry package loaded in the preamble at the top of this example file, and if you'd like to learn more about how to adjust the settings, please visit this help article on \href{https://www.overleaf.com/learn/latex/page_size_and_margins}{page size and margins}.
-
-\subsection{How to change the document language and spell check settings}
-
-Overleaf supports many different languages, including multiple different languages within one document. 
-
-To configure the document language, simply edit the option provided to the babel package in the preamble at the top of this example project. To learn more about the different options, please visit this help article on \href{https://www.overleaf.com/learn/latex/International_language_support}{international language support}.
-
-To change the spell check language, simply open the Overleaf menu at the top left of the editor window, scroll down to the spell check setting, and adjust accordingly.
-
-\subsection{How to add Citations and a References List}
-
-You can simply upload a \verb|.bib| file containing your BibTeX entries, created with a tool such as JabRef. You can then cite entries from it, like this: \cite{greenwade93}. Just remember to specify a bibliography style, as well as the filename of the \verb|.bib|. You can find a \href{https://www.overleaf.com/help/97-how-to-include-a-bibliography-using-bibtex}{video tutorial here} to learn more about BibTeX.
-
-If you have an \href{https://www.overleaf.com/user/subscription/plans}{upgraded account}, you can also import your Mendeley or Zotero library directly as a \verb|.bib| file, via the upload menu in the file-tree.
-
-\subsection{Good luck!}
-
-We hope you find Overleaf useful, and do take a look at our \href{https://www.overleaf.com/learn}{help library} for more tutorials and user guides! Please also let us know if you have any feedback using the Contact Us link at the bottom of the Overleaf menu --- or use the contact form at \url{https://www.overleaf.com/contact}.
 
 \bibliographystyle{alpha}
 \bibliography{sample}
