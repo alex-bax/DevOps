@@ -41,7 +41,7 @@ stages:
           git clone https://github.com/alex-bax/DevOps.git
           cd DevOps
           git remote add origin 
-          git checkout master
+          git checkout main
 
           git add .
           git commit -m "auto generated pdf from pipeline"
