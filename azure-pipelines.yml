@@ -44,7 +44,7 @@ stages:
           git remote add origin 
           git checkout main
 
-          git add .
+          git add main.pdf
           git commit -m "auto generated pdf from pipeline [skip ci]"
           #git pull origin master
           git status
