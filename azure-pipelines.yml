@@ -29,6 +29,9 @@ stages:
  
       steps:
       - script: |
+          git clone https://github.com/alex-bax/DevOps.git
+          cd DevOps
+          
           sudo apt-get install texlive-latex-extra
           echo Starting pdflatex
           pdflatex -interaction=nonstopmode main.tex
@@ -38,8 +41,6 @@ stages:
           git config --global user.email "alex.tennis@live.dk"
           git config --global user.name "alex-bax"
           #git init
-          git clone https://github.com/alex-bax/DevOps.git
-          cd DevOps
           git remote add origin 
           git checkout main
 
