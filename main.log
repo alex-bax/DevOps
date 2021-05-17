@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.17)  17 MAY 2021 10:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.5.17)  17 MAY 2021 10:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -318,7 +318,14 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count272
 \l__pdf_internal_box=\box51
 )
-No file main.aux.
+(./main.aux
+
+LaTeX Warning: Label `fig:dep1' multiply defined.
+
+
+LaTeX Warning: Label `fig:dep1' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -337,6 +344,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -419,6 +427,8 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 22.
 LaTeX Info: Redefining \pageref on input line 22.
 LaTeX Info: Redefining \nameref on input line 22.
+
+(./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -427,7 +437,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
-<images/dependencies-snip.png, id=5, 956.97525pt x 248.72925pt>
+<images/dependencies-snip.png, id=105, 956.97525pt x 248.72925pt>
 File: images/dependencies-snip.png Graphic file (type png)
 <use images/dependencies-snip.png>
 Package pdftex.def Info: images/dependencies-snip.png  used on input line 39.
@@ -481,13 +491,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--55
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/dependencies-snip
 .png>]
-<images/sonarcloud.png, id=27, 581.7735pt x 534.798pt>
+<images/sonarcloud.png, id=121, 581.7735pt x 534.798pt>
 File: images/sonarcloud.png Graphic file (type png)
 <use images/sonarcloud.png>
 Package pdftex.def Info: images/sonarcloud.png  used on input line 69.
 (pdftex.def)             Requested size: 310.50357pt x 285.44087pt.
  [2]
-<images/codeclimate.png, id=35, 747.39224pt x 350.5095pt>
+<images/codeclimate.png, id=127, 747.39224pt x 350.5095pt>
 File: images/codeclimate.png Graphic file (type png)
 <use images/codeclimate.png>
 Package pdftex.def Info: images/codeclimate.png  used on input line 84.
@@ -593,7 +603,7 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-<images/dashboard.png, id=59, 916.6245pt x 431.81325pt>
+<images/dashboard.png, id=144, 916.6245pt x 431.81325pt>
 File: images/dashboard.png Graphic file (type png)
 <use images/dashboard.png>
 Package pdftex.def Info: images/dashboard.png  used on input line 115.
@@ -626,24 +636,18 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 133.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 133.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 133.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 1D57D409323B122741E391B3C50D5195;1863.
 
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  1D57D409323B122741E391B3C50D5195;1863.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 7421 strings out of 483183
- 109705 string characters out of 5966292
- 395216 words of memory out of 5000000
- 22265 multiletter control sequences out of 15000+600000
+ 7453 strings out of 483183
+ 110167 string characters out of 5966292
+ 395454 words of memory out of 5000000
+ 22291 multiletter control sequences out of 15000+600000
  538235 words of font info for 45 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,10n,29p,791b,331s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -654,10 +658,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (6 pages, 455452 bytes).
+Output written on main.pdf (6 pages, 457134 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
+ 191 PDF objects out of 1000 (max. 8388607)
+ 166 compressed objects within 2 object streams
  40 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
