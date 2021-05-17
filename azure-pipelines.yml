@@ -45,7 +45,7 @@ stages:
           git checkout main
 
           git add .
-          git commit -m "auto generated pdf from pipeline"
+          git commit -m "auto generated pdf from pipeline [skip ci]"
           #git pull origin master
           git status
           
