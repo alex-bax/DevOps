@@ -39,7 +39,7 @@ stages:
           git config --global user.name "alex-bax"
           #git init
           
-          git remote add origin https://$(GITPAT)@github.com/alex-bax/DevOps.git
+          git remote add origin https://$(gitPAT)@github.com/alex-bax/DevOps.git
           git checkout master
 
           git add .
