@@ -115,7 +115,7 @@ Additionally, using NDepend, we can provide a more detailed visualization of the
 \includegraphics[width=0.7\textwidth]{images/ndepenmatrix.png}
 \caption{\label{fig:matrix} Snippet of Ndepend - Dependency Matrix}
 \end{figure}
-
+\newpage
 \subsubsection{Cloud dependencies}
 These non-repository dependencies are related to the services hosted on cloud-based domains.
 
@@ -325,7 +325,7 @@ The logging we perform is primarily centered around the controllers in the syste
 \includegraphics[width=1\textwidth]{images/DatalustSeq2.PNG}
 \caption{\label{fig:seqdashboard} Datalust Seq dashboard}
 \end{figure}
-
+\newpage
 \subsection{Brief security assessment} 
 While dotnet provides useful classes and services to write more secure code, a known security issue is that we use MD5 for hashing users passwords. MD5 is no longer considered secure as it has been cryptographically broken. Therefore using an alternative such as bcrypt or Argon2 would be safer. The most secure hashing algorithm for passwords that is currently natively supported in dotnet is PBKDF2. To solve this security concern, we could make a check when the user sign in and then rehash their password with the new algorithm.
 
@@ -368,7 +368,7 @@ Throughout the lifetime of the project, numerous decisions have been made in goo
     These kinds of tweaks were required on multiple occasions, causing a lot of headaches during development and testing of different aspects in the system.
     Having to make these workarounds, despite the excitement of discovering the possibility to do so, in the end proved to cause major setbacks throughout the entire project. Trying to scale our tier to overcome these issues rapidly bleed out our funds and was therefore not deemed a suitable option.
     As a conclusion, Azure would probably not be a desirable choice on other development projects of this scale and complexity, where multiple technologies needs to be accessible, ideally through the same website / server.
-    
+    \newpage
     \subsubsection{Infrastructure as Code (IaC)}
     We tried to implement Terraform as part of our CD/CI, but we met multiple issues. We did manage to establish a working replica of our Azure resource group through Terraform together with a working Azure DevOps CD/CI pipelines, as seen in Fig. \ref{fig:terr}. However, we didn't manage to secure our various passwords and connection strings and we experienced issues with the Terraform statefile. A small typo error in the Terraform file resulted in an error which then lead to our the statefile, which is stored in a blob storage on azure, to become desynchronized, forcing us to import every single resource into a new statefile. Due to these obstacles, we decided to postpone the implementation of integrating IaC as part of our CD/CI. 
     \begin{figure}[H]
@@ -377,7 +377,7 @@ Throughout the lifetime of the project, numerous decisions have been made in goo
     \caption{\label{fig:terr} Terraform Azure DevOps CD Pipeline}
     \end{figure}
         
-
+\newpage
 \subsection{Maintenance}
 As earlier mentioned, logging and monitoring was used to monitor the behavior of our application from where we applied maintenance accordingly. We fixed a long list of code bugs and smells with the help of the various static analysis tools e.g. SonarCloud. We also increased the coverage of our code with tests of our home and API controllers.  
 As mentioned earlier, one of our biggest struggles was to send the correct status codes for the simulator. As seen in fig \ref{fig:sim}, we were the group with the largest amount of http errors. 
